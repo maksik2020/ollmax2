@@ -24,6 +24,13 @@ namespace StoreWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;  
+
+            });
             services.AddSingleton<IBookRepository, BookRepository>();
             services.AddSingleton<BookService>();
         }
@@ -42,6 +49,7 @@ namespace StoreWeb
             }
 
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
