@@ -31,7 +31,9 @@ namespace StoreWeb
                 options.Cookie.HttpOnly = true;  
 
             });
+           
             services.AddSingleton<IBookRepository, BookRepository>();
+            services.AddSingleton<IOrderRepository,OrderRepository>();
             services.AddSingleton<BookService>();
         }
 
